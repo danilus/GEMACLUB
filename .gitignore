@@ -1,0 +1,42 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+
+# Entornos virtuales
+.venv/
+.gema_env/
+env/
+venv/
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+db.sqlite3
+/static/
+media/
+
+# Archivos de configuración específicos del entorno
+*.env
+
+# PyCharm
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
