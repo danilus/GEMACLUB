@@ -1,0 +1,32 @@
+{% extends "website/base.html" %}
+
+{% block title %}Inicio | Club{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-5">
+        <h1 class="display-4">Bienvenidos al Club Social y Deportivo</h1>
+        <p class="lead">Un espacio para compartir, crecer y disfrutar del deporte en comunidad.</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card h-100 text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Disciplinas</h5>
+                    <p class="card-text">Conocé todas las actividades deportivas que ofrecemos para diferentes edades y niveles.</p>
+                    <a href="{% url 'website:disciplines' %}" class="btn btn-light">Ver Disciplinas</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Noticias</h5>
+                    <p class="card-text">Mantenete informado sobre las últimas novedades y eventos del club.</p>
+                    <a href="{% url 'website:articles' %}" class="btn btn-light">Ver Noticias</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

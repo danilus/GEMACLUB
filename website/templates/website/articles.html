@@ -1,0 +1,24 @@
+{% extends "website/base.html" %}
+
+{% block title %}Noticias | Club{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Noticias del Club</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for article in articles %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text text-muted">Publicado: {{ article.publish_date|date:"d M Y" }}</p>
+                        <p class="card-text">{{ article.content|truncatewords:30 }}</p>
+                        <!-- Puedes agregar un enlace a una vista de detalle en el futuro -->
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay artículos publicados aún.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
