@@ -1,0 +1,76 @@
+{% extends 'website/base.html' %}
+{% block title %}Institucional - {{ club_name }}{% endblock %}
+
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-1 fs-6">
+            <li class="breadcrumb-item"><a href="{% url 'website:home' %}"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'website:institutional_overview' %}">Institucional</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Autoridades</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="mb-4">Institucional</h1>
+
+    <section class="mb-5 row">
+        <div class="col-md-6">
+            <h2 class="mt-5">Comisión Directiva</h2>
+            {% if club_board %}
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Presidente:</strong> {{ club_board.president.person.get_full_name }} (Soc. Nº {{ club_board.president.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Secretaria:</strong> {{ club_board.secretary.person.get_full_name }} (Soc. Nº {{ club_board.secretary.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Tesorera:</strong> {{ club_board.treasurer.person.get_full_name }} (Soc. Nº {{ club_board.treasurer.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Vocal Titular 1:</strong> {{ club_board.vocal_1.person.get_full_name }} (Soc. Nº {{ club_board.vocal_1.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Vocal Titular 2:</strong> {{ club_board.vocal_2.person.get_full_name }} (Soc. Nº {{ club_board.vocal_2.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Vocal Titular 3:</strong> {{ club_board.vocal_3.person.get_full_name }} (Soc. Nº {{ club_board.vocal_3.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Vocal Suplente 1:</strong> {{ club_board.suplente_1.person.get_full_name }} (Soc. Nº {{ club_board.suplente_1.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Vocal Suplente 2:</strong> {{ club_board.suplente_2.person.get_full_name }} (Soc. Nº {{ club_board.suplente_2.member_number }})
+                    </li>
+                </ul>
+            {% else %}
+                <p>No hay datos cargados de la Comisión Directiva.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="mt-5">Comisión Revisora de Cuentas</h2>
+            {% if audit_committee %}
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Titular 1:</strong> {{ audit_committee.titular_1.person.get_full_name }}  (Soc. Nº {{ audit_committee.titular_1.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Titular 2:</strong> {{ audit_committee.titular_2.person.get_full_name }} (Soc. Nº {{ audit_committee.titular_2.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Titular 3:</strong> {{ audit_committee.titular_3.person.get_full_name }} (Soc. Nº {{ audit_committee.titular_3.member_number }})
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Suplente:</strong> {{ audit_committee.suplente.person.get_full_name }} (Soc. Nº {{ audit_committee.suplente.member_number }})
+                    </li>
+                </ul>
+            {% else %}
+                <p>No hay datos cargados de la Comisión Revisora de Cuentas.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

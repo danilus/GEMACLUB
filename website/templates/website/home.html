@@ -1,30 +1,52 @@
 {% extends "website/base.html" %}
 
-{% block title %}Inicio | Club{% endblock %}
+{% block title %}Inicio | {{ club_name }}{% endblock %}
+
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-1 fs-6">
+            <li class="breadcrumb-item active"><a href="{% url 'website:home' %}"><i class="bi bi-house-door"></i> Inicio</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
 
 {% block content %}
-    <div class="text-center mb-5">
-        <h1 class="display-4">Bienvenidos al Club Social y Deportivo</h1>
-        <p class="lead">Un espacio para compartir, crecer y disfrutar del deporte en comunidad.</p>
+    <div class="text-center mb-4">
+        <h2 class="mb-3">Bienvenidos al {{ club_name }}</h2>
+        <p class="lead">Somos una comunidad comprometida con el deporte, la cultura y el desarrollo social</p>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
-            <div class="card h-100 text-white bg-primary shadow-sm">
+    <hr>
+        
+    <div class="text-center row mt-4 g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Disciplinas</h5>
-                    <p class="card-text">Conocé todas las actividades deportivas que ofrecemos para diferentes edades y niveles.</p>
-                    <a href="{% url 'website:disciplines' %}" class="btn btn-light">Ver Disciplinas</a>
+                    <h5 class="card-title">Nuestras Disciplinas y Actividades</h5>
+                    <p class="card-text">Conocé todas las actividades deportivas y culturales que ofrecemos a lo largo del año</p>
+                    <a href="{% url 'website:disciplines' %}" class="btn btn-outline-secondary">Ver Disciplinas</a>
                 </div>
             </div>
         </div>
 
-        <div class="col">
-            <div class="card h-100 text-white bg-success shadow-sm">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Noticias</h5>
-                    <p class="card-text">Mantenete informado sobre las últimas novedades y eventos del club.</p>
-                    <a href="{% url 'website:articles' %}" class="btn btn-light">Ver Noticias</a>
+                    <h5 class="card-title">Información Institucional</h5>
+                    <p>Informate más sobre la organización, historia y estructura de nuestro club</p>
+                    <a href="{% url 'website:institutional_overview' %}" class="btn btn-outline-secondary">Ver Información</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Últimas Noticias</h5>
+                    <p>Mantenete al día con las novedades recientes y los eventos del club</p>
+                    <a href="{% url 'website:articles' %}" class="btn btn-outline-secondary">Ver Noticias</a>
                 </div>
             </div>
         </div>

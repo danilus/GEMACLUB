@@ -19,6 +19,21 @@ def validate_image(image):
         raise ValidationError("Solo se permiten imágenes JPEG o PNG.")
 
 
+class ClubInfo(models.Model):
+    name = models.CharField(max_length=255)
+    logo = models.ImageField(upload_to='club/logo/', null=True, blank=True)
+    description = models.TextField(blank=True)
+    full_description = models.TextField(blank=True)
+    statute = models.FileField(upload_to='club/statute/', null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Información del Club"
+        verbose_name_plural = "Información del Club"
+
+    def __str__(self):
+        return self.name
+    
+
 class Person(models.Model):
     # Representa una persona genérica del club (socio, empleado, entrenador, etc.)
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -41,6 +56,9 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.surnames}, {self.names}"
+
+    def get_full_name(self):
+        return f"{self.names} {self.surnames}"
 
 '''
 @receiver(post_save, sender=User)

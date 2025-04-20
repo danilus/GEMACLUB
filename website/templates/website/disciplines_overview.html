@@ -2,8 +2,22 @@
 
 {% block title %}Disciplinas | Club{% endblock %}
 
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-1 fs-6">
+            <li class="breadcrumb-item"><a href="{% url 'website:home' %}"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'website:disciplines' %}">Disciplinas</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
 {% block content %}
-    <h1 class="mb-4">Disciplinas</h1>
+    <div class="text-center mb-4">
+        <h2 class="mb-3">Nuestras Disciplinas y Actividades</h2>
+        <p class="lead">Conocé todas las actividades deportivas y culturales que ofrecemos a lo largo del año.</p>
+    </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for discipline in disciplines %}
@@ -13,6 +27,7 @@
                         <h5 class="card-title">{{ discipline.name }}</h5>
                         <p class="card-text">{{ discipline.description|default:"Sin descripción." }}</p>
                         <p class="card-text"><strong>Días y horarios:</strong> {{ discipline.days_and_times }}</p>
+                        <a href="{#% url 'website:authorities' %#}" class="btn btn-outline-secondary">Info</a>
                     </div>
                 </div>
             </div>

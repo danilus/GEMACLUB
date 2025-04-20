@@ -1,0 +1,62 @@
+{% extends "website/base.html" %}
+{% block title %}Institucional | {{ club_name }}{% endblock %}
+
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-1 fs-6">
+            <li class="breadcrumb-item"><a href="{% url 'website:home' %}"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'website:institutional_overview' %}">Institucional</a></li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+    <div class="text-center mb-5">
+        <h2 class="mb-3">Información Institucional</h2>
+        <p class="lead">Conocé más sobre la organización, historia y estructura de nuestro club.</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Autoridades</h5>
+                    <p class="card-text">Accedé a la información de la Comisión Directiva y la Comisión Revisora de Cuentas</p>
+                    <a href="{% url 'website:authorities' %}" class="btn btn-outline-secondary">Ver Autoridades</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Estatuto</h5>
+                    <p class="card-text">Consultá el estatuto del club, organizado por capítulos, y descargalo en PDF</p>
+                    <a href="{% url 'website:statute' %}" class="btn btn-outline-secondary">Ver Estatuto</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Historia</h5>
+                    <p class="card-text">Descubrí la historia y los hitos más importantes desde la fundación del club</p>
+                    <a href="{#% url 'website:history' %#}" class="btn btn-outline-secondary">Ver Historia</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Sedes</h5>
+                    <p class="card-text">Información sobre las sedes del club, ubicación y actividades que allí se desarrollan</p>
+                    <a href="{#% url 'website:branches' %#  }" class="btn btn-outline-secondary">Ver Sedes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

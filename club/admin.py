@@ -5,11 +5,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import (
-    Person, Member, Discipline, DisciplineCommittee, 
-    Enrollment, Article, ArticleImage,
-    ClubBoard, AuditCommittee
+    ClubInfo, ClubBoard, AuditCommittee,
+    Person, Member, Discipline, DisciplineCommittee, Enrollment, 
+    Article, ArticleImage,
 )
 
+
+@admin.register(ClubInfo)
+class ClubInfoAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Sólo permitir un único registro
+        return not ClubInfo.objects.exists()
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):

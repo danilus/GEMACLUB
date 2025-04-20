@@ -1,0 +1,29 @@
+{% extends 'website/base.html' %}
+{% block title %}Institucional - {{ club_name }}{% endblock %}
+
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-1 fs-6">
+            <li class="breadcrumb-item"><a href="{% url 'website:home' %}"><i class="bi bi-house-door"></i> Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'website:institutional_overview' %}">Institucional</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Estatuto</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="mb-4">Institucional</h1>
+
+    <section class="mb-5">
+        <h2>Sobre el Club</h2>
+        <p><strong>Nombre oficial:</strong> {{ club_info.name }}</p>
+        {% if club_info.description %}
+            <p>{{ club_info.description }}</p>
+        {% endif %}
+        {% if club_info.statute %}
+            <p><a href="{{ club_info.statute.url }}" target="_blank" class="btn btn-outline-secondary">Ver Estatuto</a></p>
+        {% endif %}
+    </section>
+{% endblock %}
