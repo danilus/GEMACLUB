@@ -1,0 +1,32 @@
+{% extends "club/base_admin.html" %}
+{% load action_buttons %}
+
+{% block title %}{% if editing %}Editar Socio{% else %}Crear Socio{% endif %}{% endblock %}
+
+
+{% block content %}
+ 
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb fs-5 mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'club:dashboard' %}"><i class="bi bi-grid"></i> Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'club:member_list' %}"><i class="bi bi-person-vcard"></i> Socios</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{% if editing %}<i class="bi-pencil"></i> Editar{% else %}<i class="bi-plus-square"></i> Crear{% endif %}</li>
+            </ol>
+        </nav>
+
+        <div>
+            {% url 'club:member_list' as list_url %}
+            {% action_button list_url icon='' label='Cancelar' btn_class='btn-secondary' %}
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'club:member_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+{% endblock %}
