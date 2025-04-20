@@ -27,6 +27,7 @@ media/
 
 # Archivos de configuración específicos del entorno
 *.env
+.env
 
 # PyCharm
 .idea/
