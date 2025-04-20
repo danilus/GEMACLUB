@@ -1,0 +1,141 @@
+{% extends "club/base_admin.html" %}
+{% load action_buttons %}
+
+{% block title %}Socios{% endblock %}
+
+
+{% block content %}
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb fs-5 mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'club:dashboard' %}"><i class="bi bi-grid"></i> Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-person-vcard"></i> Socios</li>
+            </ol>
+        </nav>
+
+        <div>
+            {% url 'club:member_create' as create_url %}
+            {% action_button create_url icon='bi-plus-square' label='Crear' btn_class='btn-primary' %}
+        </div>
+    </div>
+        
+    <!-- Tabla de socios -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>N°</th>
+                    <th>Nombre completo</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Fecha Nac.</th>
+                    <th>Edad</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for member in members %}
+                <tr>
+                    <td>{{ member.member_number }}</td>
+                    
+                    <td>{{ member.person.get_full_name }}</td>
+                    
+                    <td>{{ member.person.dni }}</td>
+                    
+                    <td>{{ member.person.email|default:"-" }}</td>
+                    
+                    <td>{{ member.person.phone|default:"-" }}</td>
+                    
+                    <td>{{ member.person.birth_date|date:"d/m/Y" }}</td>
+
+                    <td>
+                        {{ member.person.get_age }}
+                    </td>
+
+                    <td>
+                        {% if member.is_active %}
+                            <span class="badge bg-success">Sí</span>
+                        {% else %}
+                            <span class="badge bg-danger">No</span>
+                        {% endif %}
+                    </td>
+
+                    <td class="text-nowrap">
+                        <a href="{% url 'club:member_edit' member.pk %}" class="btn btn-sm btn-warning" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <!-- Botón que abre el modal -->
+                        <button type="button" class="btn btn-sm btn-danger" title="Eliminar"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-member-id="{{ member.pk }}"
+                                data-member-number="{{ member.member_number }}"
+                                data-member-name="{{ member.person.get_full_name }}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No hay socios cargados aún.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal reutilizable -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form method="post" id="deleteMemberForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title w-100 text-center">
+                            <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>
+                            Confirmar eliminación
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Estás a punto de eliminar al Socio N° <span id="memberNumber"></span><br>
+                        <strong id="memberName"></strong><br>
+                        Esta acción no se puede deshacer.
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const memberId = button.getAttribute('data-member-id');
+                const memberNumber = button.getAttribute('data-member-number');
+                const memberName = button.getAttribute('data-member-name');
+        
+                const modalMemberNumber = deleteModal.querySelector('#memberNumber');
+                const modalMemberName = deleteModal.querySelector('#memberName');
+                const form = deleteModal.querySelector('#deleteMemberForm');
+        
+                modalMemberNumber.textContent = memberNumber;
+                modalMemberName.textContent = memberName.toUpperCase();
+        
+                form.action = `/socios/${memberId}/eliminar/`;
+            });
+        });
+    </script>        
+{% endblock %}

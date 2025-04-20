@@ -1,8 +1,11 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from datetime import date
 
 
 # Validador personalizado para imágenes
@@ -39,7 +42,10 @@ class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     names = models.CharField(max_length=100)
     surnames = models.CharField(max_length=100)
-    dni = models.CharField(max_length=20, unique=True)
+    dni = models.CharField(
+        max_length=20, unique=True,
+        validators=[RegexValidator(regex=r'^\d+$', message='El DNI solo debe contener números')]
+    )
     email = models.EmailField(unique=True, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     postal_code = models.CharField(max_length=10, null=True, blank=True)
@@ -60,6 +66,13 @@ class Person(models.Model):
     def get_full_name(self):
         return f"{self.names} {self.surnames}"
 
+    def get_age(self):
+        if self.birth_date:
+            today = date.today()
+            age = today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+            return age
+        return None
+    
 '''
 @receiver(post_save, sender=User)
 def create_or_update_person(sender, instance, created, **kwargs):
@@ -82,8 +95,20 @@ class Member(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"#{self.member_number} - {self.person}"
+        return f"N° {self.member_number} - {self.person}"
 
+    def delete(self, *args, **kwargs):
+        # Guardamos la referencia antes de eliminar el Member
+        person = self.person
+        user = person.user if person else None
+
+        super().delete(*args, **kwargs)  # Elimina el Member
+
+        if user:
+            user.delete()
+        if person:
+            person.delete()
+            
 
 class ClubBoard(models.Model):
     # Comisión Directiva del club, con vocales ordenados
