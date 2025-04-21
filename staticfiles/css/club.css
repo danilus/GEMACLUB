@@ -1,0 +1,114 @@
+:root {
+    --club-red: #E41B0E;
+    --club-yellow: #FEE900;
+    --club-white: #FFFFFF;
+    --club-black: #000000;
+
+    --club-red-dark: #9E130A;
+    --club-grey-dark: #666666;
+    --club-neutral-bg: #f7f7f7;
+    --club-neutral-dark: #333333;    
+}
+
+
+/* Mostrar submenús en hover (pantallas grandes) */
+@media (min-width: 992px) {
+    .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+}
+
+
+/*** HEADER ***/
+
+.site-header {
+    background: linear-gradient(90deg, var(--club-black), var(--club-red-dark));
+    /* background: linear-gradient(90deg, var(--club-red-dark), var(--club-black)); */
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* toque de profundidad */
+}
+.site-header .branding {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.site-header img {
+    height: 60px;
+}
+.site-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+.site-header .cta {
+    margin-left: auto;
+}
+
+.btn-cta-header {
+    background-color: var(--club-black);
+    color: var(--club-yellow);
+    border: 1px solid var(--club-yellow);
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-cta-header:hover {
+    background-color: var(--club-yellow);
+    color: var(--club-black);
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+.breadcrumb a {
+    text-decoration: none;
+    color: var(--club-black);
+}
+.breadcrumb a:hover {
+    color: var(--club-red);
+}
+
+
+
+/*** MENU ***/
+
+.navbar {
+    background: linear-gradient(90deg, #f2f2f2, #e8e8e8); 
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-nav-link {
+    color: #000000;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.custom-nav-link:hover,
+.custom-nav-link:focus {
+    color: var(--club-red);
+    text-decoration: none;
+}
+
+.custom-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background-color: #E41B0E;
+    transition: width 0.3s ease-in-out;
+}
+
+.custom-nav-link:hover::after {
+    width: 100%;
+}
