@@ -23,7 +23,7 @@
 
 <body>
     <!-- Encabezado institucional -->
-    <div class="site-header">
+    <header class="site-header container-fluid">
         <div class="container d-flex align-items-center justify-content-between flex-wrap">
             <div class="branding d-flex align-items-center gap-3">
                 <img src="{% static 'img/logo_fondo_negro.png' %}" alt="Logo del Club" height="64">
@@ -32,11 +32,13 @@
                     <p class="mb-0 fst-italic" style="font-size: 0.9rem;">Nuestro club, una familia</p>
                 </div>
             </div>
-            <div class="cta">
+
+            <div class="cta d-none d-lg-flex align-items-center gap-3">
+                <a href="{#% url 'login' %#}" class="btn btn-outline-light">Iniciar sesión</a>
                 <a href="#" class="btn btn-outline-light">Asociate</a>
-            </div>
+            </div>            
         </div>
-    </div>    
+    </header>
     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg border-bottom">
@@ -46,6 +48,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
@@ -81,6 +84,12 @@
 
                     <li class="nav-item"><a class="nav-link custom-nav-link" href="{% url 'website:articles' %}">Noticias</a></li>
                 </ul>
+
+                <!-- CTA para móviles -->
+                <div class="cta d-block d-lg-none mt-3">
+                    <a href="{#% url 'login' %#}" class="btn btn-outline-dark w-100 mb-2">Iniciar sesión</a>
+                    <a href="#" class="btn btn-outline-danger w-100">Asociate</a>
+                </div>
             </div>
         </div>
     </nav>

@@ -19,12 +19,25 @@
     }
 }
 
+@media (max-width: 768px) {
+    header.site-header {
+        padding: 10px 15px;  /* Ajusta los márgenes */
+        font-size: 1.2rem;    /* Ajusta el tamaño de fuente */
+    }
+
+    .site-header .cta {
+        display: none;
+    }
+
+    .navbar-collapse .cta {
+        display: block;
+    }
+}
 
 /*** HEADER ***/
 
 .site-header {
     background: linear-gradient(90deg, var(--club-black), var(--club-red-dark));
-    /* background: linear-gradient(90deg, var(--club-red-dark), var(--club-black)); */
     color: #fff;
     padding: 1rem 2rem;
     display: flex;
